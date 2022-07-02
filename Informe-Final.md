@@ -16,14 +16,14 @@ Mediante el uso de algoritmos de texturización e iluminación de objetos obtene
 
 # Desarrollo (incluir pantallazos y código de las principales funciones)
 -Algoritmo de instanciamiento
-![image info](./capturas/Algoritmo de Instanciamiento-1.png)
-![image info](./capturas/Algoritmo de Instanciamiento-2.png)
+![plot](./capturas/Algoritmo de Instanciamiento-1.png)
+![plot](./capturas/Algoritmo de Instanciamiento-2.png)
  
 -Implementación de la iluminación de los objetos
-![image info](./capturas/Implementacion de iluminacion de objetos.png)
+![plot](./capturas/Implementacion de iluminacion de objetos.png)
 
 -Controladores de la iluminación
- ![image info](./capturas/Controladores de iluminacion.png) 
+ ![plot](./capturas/Controladores de iluminacion.png) 
 
 # Conclusiones
 En resumen, se consiguió la implementación de la iluminación y color de objetos controlados por sliders. De igual forma, el instanciamiento de más de 50000 instancias mediante los algoritmos pertinentes.
