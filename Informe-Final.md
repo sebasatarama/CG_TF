@@ -14,16 +14,16 @@ Complementar el proyecto presentado en el trabajo parcial, incluyendo todos los 
 # Descripción de la solución propuesta
 Mediante el uso de algoritmos de texturización e iluminación de objetos obtener lo que son los objetos como las cajitas con su respectiva iluminación controlada por sliders. De igual forma, para lograr la instanciamiento es implementado con la ayuda de un algoritmo conformado por el  ancho y largo del piso que se solicita.
 
-# Desarrollo (incluir pantallazos y código de las principales funciones)
+# Desarrollo 
 -Algoritmo de instanciamiento
-![plot](./capturas/Algoritmo de Instanciamiento-1.png)
-![plot](./capturas/Algoritmo de Instanciamiento-2.png)
+![plot](capturas/Algoritmo de Instanciamiento-1.png? raw = true)
+![plot](capturas/Algoritmo de Instanciamiento-2.png? raw = true)
  
 -Implementación de la iluminación de los objetos
-![plot](./capturas/Implementacion de iluminacion de objetos.png)
+![plot](capturas/Implementacion de iluminacion de objetos.png? raw = true)
 
 -Controladores de la iluminación
- ![plot](./capturas/Controladores de iluminacion.png) 
+ ![plot](capturas/Controladores de iluminacion.png? raw = true) 
 
 # Conclusiones
 En resumen, se consiguió la implementación de la iluminación y color de objetos controlados por sliders. De igual forma, el instanciamiento de más de 50000 instancias mediante los algoritmos pertinentes.
