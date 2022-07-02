@@ -1,18 +1,21 @@
 
 # Introducción
-Para el trabajo final del curso de Computación Gráfica, se nos pidió lo siguiente, mediante el uso de un repositorio GitHub actualizar el trabajo parcial configurando el manejo de la cámara, movimiento por teclado. Por otro lado, uso de modelos wavefront, utilizar todos los tipos de iluminación e instanciamiento de por lo menos 50000 instancias. Por último, presentación de un video el cual se explique clara y organizadamente detallada.
+Para el trabajo final del curso de Computación Gráfica, se nos pidió añadir nuevas técnicas de computación gráfica, como iluminación e instanciamiento, a nuestro trabajo parcial. El trabajo fue desarrollado en el lenguaje Java Script y su avance fue subido al presente repositorio de Git.
 
 # Objetivos
-- Demostrar los tipos de iluminación que se ha empleado en el transcurso del curso de manera efectiva y configurable mediante sliders implementados en HTML.
-- Evidenciar que el desarrollo del instanciamiento es considerablemente viable a comparación de la implementación de objetos que se desarrollaron en la primera parte del  curso.
-- Mediante una presentación en video fomentar el uso de algoritmos de iluminación y la viabilidad del instanciamiento.
+- Aplicar los tipos de iluminación que se han empleado en el transcurso del curso de manera efectiva y configurable mediante sliders implementados en HTML.
+- Evidenciar que el desarrollo del instanciamiento es considerablemente viable a comparación de la implementación de objetos que se desarrollaron en la primera parte del curso.
+- Mediante una presentación en video, argumentar el uso de algoritmos de iluminación y la viabilidad del instanciamiento.
 
 # Problema/ Caso desarrollado
 Complementar el proyecto presentado en el trabajo parcial, incluyendo todos los tipos de iluminación e instanciamiento.
 
 
 # Descripción de la solución propuesta
-Mediante el uso de algoritmos de texturización e iluminación de objetos obtener lo que son los objetos como las cajitas con su respectiva iluminación controlada por sliders. De igual forma, para lograr la instanciamiento es implementado con la ayuda de un algoritmo conformado por el  ancho y largo del piso que se solicita.
+- El suelo fue instanciado con 250,000 instancias. 500 x 500 .
+- Se cuenta con tres objetos, dos de ellos tienen iluminación ambiental y difusa controlada por sliders; y el otro iluminación especular a través de un mapa especular.
+- Se cuenta con mivimiento total de la camara.
+- Se aplicaron un total de 4 programas diferentes. Cada uno con sus respectivos vert y frags.
 
 # Desarrollo 
 -Algoritmo de instanciamiento
@@ -27,14 +30,16 @@ Mediante el uso de algoritmos de texturización e iluminación de objetos obtene
 -Implementación de la iluminación de los objetos
 
 
-![a](capturas/Implementacion_de_iluminacion_de_objetos.png)
+![a](capturas/Implementación_de_iluminacion_de_objetos.png)
 
 
 -Controladores de la iluminación
 
 
- ![a](capturas/Controladores_de_iluminacion.png) 
+ ![a](capturas/Controladores_de_iluminación.png) 
  
 
 # Conclusiones
-En resumen, se consiguió la implementación de la iluminación y color de objetos controlados por sliders. De igual forma, el instanciamiento de más de 50000 instancias mediante los algoritmos pertinentes.
+- El instanciamiento permite mostrar gran cantidad de objetos con mucho mejor rendimiento. Esto fue demostrado en nuestro proyecto, que siempre mantuvo un tasa de frames aceptable, a pesar de contar con 250,000 objetos.
+- Cada objeto cuenta con su propia iluminación, por lo que la luz ambiental es una simple simulación en realidad.
+- El trabajo fue desarrollado con éxito, incluyendo todo lo asignado y sin problemas de código.
