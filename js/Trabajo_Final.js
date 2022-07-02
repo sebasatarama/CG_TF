@@ -23,7 +23,6 @@ async function main() {
   if (!gl) return undefined !== console.log("WebGL 2.0 not supported");
 
   twgl.setDefaults({ attribPrefix: "a_" });
-
   const vertSrc = await fetch("glsl/final.vert").then((r) => r.text());
   const fragSrc = await fetch("glsl/final.frag").then((r) => r.text());
   const meshProgramInfo = twgl.createProgramInfo(gl, [vertSrc, fragSrc]);
@@ -34,11 +33,6 @@ async function main() {
   );
   const cubex2 = await cg.loadObj(
     "models/cubito/oro.obj",
-    gl,
-    meshProgramInfo,
-  );
-  const floor = await cg.loadObj(
-    "models/cubito/arena.obj",
     gl,
     meshProgramInfo,
   );
@@ -58,9 +52,36 @@ async function main() {
     gl,
     crateProgramInfo,
   );
-  
 
-  const cam = new cg.Cam([0, -5, 25], 10);
+  const cpos = [0, -5, 25];
+  const w = 500;
+  const l = 500;
+  let c = 0;
+  const numInstances = w * l;
+  const transforms = new Float32Array(numInstances * 16);
+  const infoInstances = new Array(numInstances);
+  for (let i = -w; i < w; i=i+2){
+    for (let j = -l; j < l; j=j+2){
+      infoInstances[c] = { transform: transforms.subarray(c*16, c*16+16) };
+      m4.identity(infoInstances[c].transform);
+      m4.translate(
+        infoInstances[c].transform,
+        infoInstances[c].transform,
+        [i, -20, j],
+      )
+      c++;
+    }
+  }
+  const floorvertSrc = await fetch("glsl/instance.vert").then((r) => r.text());
+  const floorfragSrc = await fetch("glsl/instance.frag").then((r) => r.text());
+  const floorProgramInfo = twgl.createProgramInfo(gl, [floorvertSrc, floorfragSrc]);
+  const floor = await cg.loadObj(
+    "models/cubito/arena.obj",
+    gl,
+    floorProgramInfo,
+    transforms,
+  );
+  const cam = new cg.Cam(cpos, 10);
 
   let aspect = 1;
   let deltaTime = 0;
@@ -104,7 +125,11 @@ async function main() {
     ];
     delta3[i] = [rndb(-5.1, 5.1), rndb(-5.1, 5.1), rndb(-5.1, 5.1)];
   }
-
+  const floorUniforms = {
+    u_ambientLight: new Float32Array([1.0, 1.0, 1.0]),
+    u_lightPosition: new Float32Array([0.0, -100.0, 0.0]),
+    u_viewPosition: cam.pos,
+  }
   const uniforms = {
     u_world: m4.create(),
     u_projection: m4.create(),
@@ -197,8 +222,8 @@ async function main() {
       twgl.drawBufferInfo(gl, bufferInfo);
     }
 
-    gl.useProgram(meshProgramInfo.program);
 
+    gl.useProgram(meshProgramInfo.program);
     v3.rotateY(
       crateLightUniforms.u_lightPosition,
       lightRotSource,
@@ -206,7 +231,7 @@ async function main() {
       -theta,
     );
 
-    let camactualx = cam.pos[0]
+/*     let camactualx = cam.pos[0]
     let camactualz = cam.pos[2]
 
     if (camactualx - camx >= 1){
@@ -229,15 +254,21 @@ async function main() {
         m4.translate(uniforms.u_world, uniforms.u_world, [i + camx, -20, j + camz]);
         twgl.setUniforms(meshProgramInfo, uniforms);
         twgl.setUniforms(meshProgramInfo, fragUniforms);
-
-        for (const { bufferInfo, vao, material } of floor) {
-          gl.bindVertexArray(vao);
-          twgl.setUniforms(meshProgramInfo, {}, material);
-          twgl.drawBufferInfo(gl, bufferInfo);
-        }
       }
     }
-
+    for (const { bufferInfo, vertexArrayInfo, vao, material } of floor) {
+      gl.bindVertexArray(vao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufferInfo.attribs.a_transform.buffer);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, transforms);
+      twgl.setUniforms(meshProgramInfo, {}, material);
+      twgl.drawBufferInfo(
+        gl, 
+        vertexArrayInfo, 
+        gl.TRIANGLES, 
+        vertexArrayInfo.numElements,
+        0,
+        numInstances);
+    } */     
     for (let i = 0; i < numObjs; i++) {
       m4.identity(uniforms.u_world);
       m4.translate(uniforms.u_world, uniforms.u_world, positions[i]);
@@ -347,7 +378,7 @@ async function main() {
           }
       }
     }
-    
+
     gl.useProgram(crateProgramInfo.program);
     for (let i = 0; i < numObjs3; i++) {
       m4.identity(uniforms.u_world);
@@ -386,8 +417,24 @@ async function main() {
         }
       }
     }
-
-
+    gl.useProgram(floorProgramInfo.program);
+    m4.identity(uniforms.u_world);
+    twgl.setUniforms(floorProgramInfo, uniforms);
+    twgl.setUniforms(floorProgramInfo, floorUniforms);
+    for (const { bufferInfo, vertexArrayInfo, vao, material } of floor) {
+      gl.bindVertexArray(vao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufferInfo.attribs.a_transform.buffer);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, transforms);
+      twgl.setUniforms(floorProgramInfo, {}, material);
+      twgl.drawBufferInfo(
+        gl,
+        vertexArrayInfo,
+        gl.TRIANGLES,
+        vertexArrayInfo.numElements,
+        0,
+        numInstances,
+      );
+    }
     requestAnimationFrame(render);
   }
   requestAnimationFrame(render);
