@@ -14,7 +14,7 @@ Complementar el proyecto presentado en el trabajo parcial, incluyendo todos los 
 # Descripción de la solución propuesta
 - El suelo fue instanciado con 250,000 instancias. 500 x 500 .
 - Se cuenta con tres objetos, dos de ellos tienen iluminación ambiental y difusa controlada por sliders; y el otro iluminación especular a través de un mapa especular.
-- Se cuenta con mivimiento total de la camara.
+- Se cuenta con movimiento total de la camara.
 - Se aplicaron un total de 4 programas diferentes. Cada uno con sus respectivos vert y frags.
 
 # Desarrollo 
